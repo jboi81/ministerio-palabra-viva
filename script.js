@@ -17,7 +17,22 @@
   if (toggle) toggle.addEventListener("click", function () { setMenu(true); });
   if (closeBtn) closeBtn.addEventListener("click", function () { setMenu(false); });
   if (overlay) overlay.addEventListener("click", function (e) {
-    if (e.target.tagName === "A") setMenu(false);
+    if (e.target.tagName !== "A") return;
+    var href = e.target.getAttribute("href");
+    setMenu(false);
+    if (href && href.charAt(0) === "#") {
+      /* While the menu is open the page behind it is scroll-locked, and
+         mobile browsers can swallow the default anchor jump as the lock
+         releases. Close first, then scroll to the section explicitly. */
+      e.preventDefault();
+      var target = document.querySelector(href);
+      if (target) {
+        setTimeout(function () {
+          target.scrollIntoView({ behavior: "smooth" });
+          if (window.history && history.replaceState) history.replaceState(null, "", href);
+        }, 40);
+      }
+    }
   });
 
   /* --- Desktop "Más" dropdown --- */
