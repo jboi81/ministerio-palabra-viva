@@ -172,6 +172,7 @@ a { color: var(--gold-bright); }
 /* ---------- Study grid ---------- */
 .study-grid { display: grid; gap: 1.6rem; grid-template-columns: 1.4fr 1fr; margin-top: 2.2rem; }
 @media (max-width: 820px) { .study-grid { grid-template-columns: 1fr; } }
+.music-block { margin-top: 2.4rem; }
 .series-card {
   background: var(--panel); border: 1px solid #262626; border-top: 4px solid var(--gold);
   border-radius: var(--radius); padding: 1.5rem;
